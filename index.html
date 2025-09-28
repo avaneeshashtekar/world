@@ -67,7 +67,7 @@
       border-radius: 5px;
       background-color: #fff;
       color: #4CAF50;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       margin-top: auto;
       position: relative;
     }
@@ -81,6 +81,14 @@
       color: white;
       font-size: 24px;
       border-radius: 10px;
+    }
+
+    .cart-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      margin-top: auto;
     }
 
 
@@ -264,79 +272,95 @@
     <div class="grid-container">
       <div class="rectangle">
         <span>1</span>
-        <div class="controls">
-          <button onclick="decreaseQty(1);">-</button>
-          <span id="qty-1">1</span>
-          <button onclick="increaseQty(1)">+</button>
+        <div class="cart-row">
+          <button class="add-to-cart" onclick="addToCart(1)">Add to Cart</button>
+          <div class="controls">
+            <button onclick="decreaseQty(1);">-</button>
+            <span id="qty-1">1</span>
+            <button onclick="increaseQty(1)">+</button>
+          </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart(1)">Add to Cart</button>
       </div>
 
       <div class="rectangle">
         <span>2</span>
-        <div class="controls">
-          <button onclick="decreaseQty(2)">-</button>
-          <span id="qty-2">1</span>
-          <button onclick="increaseQty(2)">+</button>
+        <div class="cart-row">
+          <button class="add-to-cart" onclick="addToCart(2)">Add to Cart</button>
+          <div class="controls">
+            <button onclick="decreaseQty(2)">-</button>
+            <span id="qty-2">1</span>
+            <button onclick="increaseQty(2)">+</button>
+          </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart(2)">Add to Cart</button>
       </div>
       <div class="rectangle">
         <span>3</span>
-        <div class="controls">
-          <button onclick="decreaseQty(3)">-</button>
-          <span id="qty-3">1</span>
-          <button onclick="increaseQty(3)">+</button>
+        <div class="cart-row">
+          <button class="add-to-cart" onclick="addToCart(3)">Add to Cart</button>
+          <div class="controls">
+            <button onclick="decreaseQty(3)">-</button>
+            <span id="qty-3">1</span>
+            <button onclick="increaseQty(3)">+</button>
+          </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart(3)">Add to Cart</button>
       </div>
 
       <div class="rectangle">
         <span>4</span>
-        <div class="controls">
-          <button onclick="decreaseQty(4)">-</button>
-          <span id="qty-4">1</span>
-          <button onclick="increaseQty(4)">+</button>
+        <div class="cart-row">
+          <button class="add-to-cart" onclick="addToCart(4)">Add to Cart</button>
+          <div class="controls">
+            <button onclick="decreaseQty(4)">-</button>
+            <span id="qty-4">1</span>
+            <button onclick="increaseQty(4)">+</button>
+          </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart(4)">Add to Cart</button>
       </div>
       <div class="rectangle">
         <span>5</span>
-        <div class="controls">
-          <button onclick="decreaseQty(5)">-</button>
-          <span id="qty-5">1</span>
-          <button onclick="increaseQty(5)">+</button>
+        <div class="cart-row">
+          <button class="add-to-cart" onclick="addToCart(5)">Add to Cart</button>
+          <div class="controls">
+            <button onclick="decreaseQty(5)">-</button>
+            <span id="qty-5">1</span>
+            <button onclick="increaseQty(5)">+</button>
+          </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart(5)">Add to Cart</button>
       </div>
 
       <div class="rectangle">
         <span>6</span>
-        <div class="controls">
-          <button onclick="decreaseQty(6)">-</button>
-          <span id="qty-6">1</span>
-          <button onclick="increaseQty(6)">+</button>
+        <div class="cart-row">
+          <button class="add-to-cart" onclick="addToCart(6)">Add to Cart</button>
+          <div class="controls">
+            <button onclick="decreaseQty(6)">-</button>
+            <span id="qty-6">1</span>
+            <button onclick="increaseQty(6)">+</button>
+          </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart(6)">Add to Cart</button>
       </div>
       <div class="rectangle">
         <span>7</span>
-        <div class="controls">
-          <button onclick="decreaseQty(7)">-</button>
-          <span id="qty-7">1</span>
-          <button onclick="increaseQty(7)">+</button>
+        <div class="cart-row">
+          <button class="add-to-cart" onclick="addToCart(7)">Add to Cart</button>
+          <div class="controls">
+            <button onclick="decreaseQty(7)">-</button>
+            <span id="qty-7">1</span>
+            <button onclick="increaseQty(7)">+</button>
+          </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart(7)">Add to Cart</button>
       </div>
 
       <div class="rectangle">
         <span>8</span>
-        <div class="controls">
-          <button onclick="decreaseQty(8)">-</button>
-          <span id="qty-8">1</span>
-          <button onclick="increaseQty(8)">+</button>
+        <div class="cart-row">
+          <button class="add-to-cart" onclick="addToCart(8)">Add to Cart</button>
+          <div class="controls">
+            <button onclick="decreaseQty(8)">-</button>
+            <span id="qty-8">1</span>
+            <button onclick="increaseQty(8)">+</button>
+          </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart(8)">Add to Cart</button>
       </div>
     </div>
   </div>
