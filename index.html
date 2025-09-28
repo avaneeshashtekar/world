@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>4 Screen Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .cart-icon {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      font-size: 28px;
+      text-decoration: none;
+      color: #333;
+
+      background: #fff;
+      border-radius: 80%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cart-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: 30px;
+      right: 2px;
+      background: #f90904;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 12px;
+      min-width: 8px;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 200px);
+      gap: 20px;
+      width: 80%;
+      margin: 50px auto;
+    }
+
+    .add-to-cart {
+      padding: 6px 12px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #fff;
+      color: #4CAF50;
+      margin-bottom: 15px;
+      margin-top: auto;
+      position: relative;
+    }
+
+    .rectangle {
+      background-color: #ffbb77;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      border-radius: 10px;
+    }
+
+
+    .controls {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .controls button {
+      padding: 5px 10px;
+      font-size: 18px;
+      border: none;
+      background: #ddd;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .controls span {
+      margin: 0 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="screen1">
+
+    small portrait
+
+
+
+
+  </div>
+  <div id="screen2">
+
+    small landscape
+
+   
+
+
+
+  </div>
+  <div id="screen3">
+
+
+    big portrait
+
+
+
+
+  </div>
+  <div id="screen4" style="text-align: center;
+     background-color: #fdfbf2;
+     height: 100vh;
+     box-sizing: border-box;">
+    <div style=" 
+        position: absolute;
+        width: 100%;             
+        height: 70px;           
+        background-color: #262626; 
+        z-index: 0;">
+    </div>
+    <button style="
+            position: relative;
+            z-index: 1;
+            width: 80%;
+            max-width: 600px;
+    	    padding: 7px 5px;
+    	    font-size: 18px;
+            border-radius: 18px;
+    	    background-color: #ddd;
+            cursor: pointer;
+            margin-top: 12px;" onclick="window.location.href='searchpage.html';">
+      search🔍
+    </button>
+    <h1 style="margin-top: 40px; font-size: 48px; font-weight: bold;">
+      JerseyWave
+    </h1>
+    <a href="cart.html" class="cart-icon">🛒
+      <span class="cart-badge" id="cartCount">0</span>
+    </a>
+
+    <script>
+      let count = 0;
+      const cartCount = document.getElementById("cartCount");
+      let quantities = {};
+
+      function updateBadge() {
+        const cartCount = document.getElementById("cartCount");
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+
+        let distinctCount = cartItems.length;
+
+        if (distinctCount === 0) {
+          cartCount.style.display = "none";
+        } else {
+          cartCount.style.display = "inline-block";
+          cartCount.textContent = distinctCount;
+        }
+      }
+
+      function increaseQty(productId) {
+        const qtySpan = document.getElementById("qty-" + productId);
+        let current = parseInt(qtySpan.textContent);
+        current++;
+        qtySpan.textContent = current;
+
+
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        let existing = cartItems.find(item => item.id === productId);
+        if (existing) {
+          existing.qty = current;
+          localStorage.setItem("cartItems", JSON.stringify(cartItems));
+          loadQuantities();
+        }
+      }
+
+      function decreaseQty(productId) {
+        const qtySpan = document.getElementById("qty-" + productId);
+        let current = parseInt(qtySpan.textContent);
+        if (current > 1) {
+          current--;
+          qtySpan.textContent = current;
+
+
+          let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+          let existing = cartItems.find(item => item.id === productId);
+          if (existing) {
+            existing.qty = current;
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            loadQuantities();
+          }
+        }
+      }
+
+
+      function addToCart(productId) {
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        let qtySpan = document.getElementById("qty-" + productId);
+        let currentQty = parseInt(qtySpan.textContent);
+
+        let existing = cartItems.find(item => item.id === productId);
+        if (existing) {
+          existing.qty += 1;
+        } else {
+
+          cartItems.push({ id: productId, qty: currentQty });
+        }
+
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        loadQuantities();
+        updateBadge();
+      }
+
+
+      function loadQuantities() {
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        cartItems.forEach(item => {
+          const qtySpan = document.getElementById("qty-" + item.id);
+          if (qtySpan) {
+            qtySpan.textContent = item.qty;
+          }
+        });
+      }
+      window.onload = function () {
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+
+        count = cartItems.length;
+        updateBadge();
+
+
+        loadQuantities();
+      };
+    </script>
+
+    <div class="grid-container">
+      <div class="rectangle">
+        <span>1</span>
+        <div class="controls">
+          <button onclick="decreaseQty(1);">-</button>
+          <span id="qty-1">1</span>
+          <button onclick="increaseQty(1)">+</button>
+        </div>
+        <button class="add-to-cart" onclick="addToCart(1)">Add to Cart</button>
+      </div>
+
+      <div class="rectangle">
+        <span>2</span>
+        <div class="controls">
+          <button onclick="decreaseQty(2)">-</button>
+          <span id="qty-2">1</span>
+          <button onclick="increaseQty(2)">+</button>
+        </div>
+        <button class="add-to-cart" onclick="addToCart(2)">Add to Cart</button>
+      </div>
+      <div class="rectangle">
+        <span>3</span>
+        <div class="controls">
+          <button onclick="decreaseQty(3)">-</button>
+          <span id="qty-3">1</span>
+          <button onclick="increaseQty(3)">+</button>
+        </div>
+        <button class="add-to-cart" onclick="addToCart(3)">Add to Cart</button>
+      </div>
+
+      <div class="rectangle">
+        <span>4</span>
+        <div class="controls">
+          <button onclick="decreaseQty(4)">-</button>
+          <span id="qty-4">1</span>
+          <button onclick="increaseQty(4)">+</button>
+        </div>
+        <button class="add-to-cart" onclick="addToCart(4)">Add to Cart</button>
+      </div>
+      <div class="rectangle">
+        <span>5</span>
+        <div class="controls">
+          <button onclick="decreaseQty(5)">-</button>
+          <span id="qty-5">1</span>
+          <button onclick="increaseQty(5)">+</button>
+        </div>
+        <button class="add-to-cart" onclick="addToCart(5)">Add to Cart</button>
+      </div>
+
+      <div class="rectangle">
+        <span>6</span>
+        <div class="controls">
+          <button onclick="decreaseQty(6)">-</button>
+          <span id="qty-6">1</span>
+          <button onclick="increaseQty(6)">+</button>
+        </div>
+        <button class="add-to-cart" onclick="addToCart(6)">Add to Cart</button>
+      </div>
+      <div class="rectangle">
+        <span>7</span>
+        <div class="controls">
+          <button onclick="decreaseQty(7)">-</button>
+          <span id="qty-7">1</span>
+          <button onclick="increaseQty(7)">+</button>
+        </div>
+        <button class="add-to-cart" onclick="addToCart(7)">Add to Cart</button>
+      </div>
+
+      <div class="rectangle">
+        <span>8</span>
+        <div class="controls">
+          <button onclick="decreaseQty(8)">-</button>
+          <span id="qty-8">1</span>
+          <button onclick="increaseQty(8)">+</button>
+        </div>
+        <button class="add-to-cart" onclick="addToCart(8)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function detectScreen() {
+      let dpi = 96 * window.devicePixelRatio;
+      let widthInches = window.innerWidth / dpi;
+      let heightInches = window.innerHeight / dpi;
+
+
+      document.getElementById("screen1").style.display = "none";
+      document.getElementById("screen2").style.display = "none";
+      document.getElementById("screen3").style.display = "none";
+      document.getElementById("screen4").style.display = "none";
+
+
+      if (widthInches < heightInches) {
+        if (heightInches < 6.9 && widthInches < 3.1) {
+          document.getElementById("screen1").style.display = "block";
+        } else {
+          document.getElementById("screen3").style.display = "block";
+        }
+      } else if (widthInches > heightInches) {
+        if (heightInches < 6.9 && widthInches < 3.1) {
+          document.getElementById("screen2").style.display = "block";
+        } else {
+          document.getElementById("screen4").style.display = "block";
+        }
+      }
+    }
+
+    detectScreen();
+    window.onresize = detectScreen;
+
+  </script>
+
+</body>
+
+</html>

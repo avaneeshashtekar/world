@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fdfbf2;
+      font-family: Arial, sans-serif;
+    }
+
+    .back-arrow {
+      font-size: 32px;
+      text-decoration: none;
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 60px;
+      font-size: 36px;
+      color: #333;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto;
+      gap: 20px;
+      width: 80%;
+      margin: 40px auto;
+    }
+
+    .rectangle {
+      background-color: #77ff7c;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      border-radius: 10px;
+      height: 200px;
+      padding: 10px;
+    }
+
+    .empty-message {
+      text-align: center;
+      font-size: 20px;
+      margin-top: 50px;
+      color: #666;
+    }
+
+    .clear-btn {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #f44336;
+      color: white;
+      cursor: pointer;
+    }
+
+    .clear-btn:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    function detectScreen() {
+      let dpi = 96 * window.devicePixelRatio;
+      let widthInches = window.innerWidth / dpi;
+      let heightInches = window.innerHeight / dpi;
+
+
+      if (widthInches < heightInches && !(heightInches < 6.9 && widthInches < 3.1)) {
+        window.location.href = 'index.html';
+      }
+    }
+    detectScreen();
+    window.onresize = detectScreen;
+  </script>
+  <a class="back-arrow" href="index.html">&#8592; Back</a>
+  <h1>Your Cart</h1>
+
+  <div class="grid-container" id="cartContainer"></div>
+  <div class="empty-message" id="emptyMessage">Your cart is empty.</div>
+  <button id="clearCartBtn" class="clear-btn" style="display:none;">
+    Clear Cart
+  </button>
+  <div class="grid-container" id="cartContainer"></div>
+
+  <script>
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const cartContainer = document.getElementById("cartContainer");
+    const emptyMessage = document.getElementById("emptyMessage");
+    const clearCartBtn = document.getElementById("clearCartBtn");
+
+    function renderCart() {
+      cartContainer.innerHTML = "";
+      if (cartItems.length > 0) {
+        emptyMessage.style.display = "none";
+        clearCartBtn.style.display = "block";
+
+        cartItems.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "rectangle";
+          div.textContent = "Product " + item;
+          cartContainer.appendChild(div);
+        });
+      } else {
+        emptyMessage.style.display = "block";
+        clearCartBtn.style.display = "none";
+      }
+    }
+
+    clearCartBtn.addEventListener("click", () => {
+      localStorage.removeItem("cartItems");
+      cartItems.length = 0;
+      renderCart();
+    });
+
+    renderCart();
+  </script>
+  <script>
+    function loadCart() {
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      const container = document.getElementById("cartContainer");
+      container.innerHTML = "";
+
+      if (cartItems.length === 0) {
+        container.innerHTML = "";
+        document.getElementById("clearCartBtn").style.display = "none";
+        return;
+      }
+
+      document.getElementById("clearCartBtn").style.display = "block";
+
+      cartItems.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "rectangle";
+
+        div.innerHTML = `
+      <span>Product ${item.id}</span>
+      <div class="controls">
+        <button style="top: 140px; position: relative;" onclick="decreaseCartQty(${item.id})">-</button>
+        <span style="top: 143px; position: relative;" id="cart-qty-${item.id}">${item.qty}</span>
+        <button style="top: 140px; position: relative;" onclick="increaseCartQty(${item.id})">+</button>
+      </div>
+    `;
+
+        container.appendChild(div);
+      });
+    }
+    function increaseCartQty(productId) {
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      let existing = cartItems.find(item => item.id === productId);
+      if (existing) {
+        existing.qty++;
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        loadCart();
+      }
+    }
+
+    function decreaseCartQty(productId) {
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      let existingIndex = cartItems.findIndex(item => item.id === productId);
+      if (existingIndex !== -1) {
+        cartItems[existingIndex].qty--;
+        if (cartItems[existingIndex].qty < 1) {
+
+          cartItems.splice(existingIndex, 1);
+        }
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        loadCart();
+      }
+    }
+
+    window.onload = loadCart;
+  </script>
+
+</body>
+
+</html>
