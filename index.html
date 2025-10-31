@@ -121,7 +121,7 @@
 
     small landscape
 
-   
+
 
 
 
@@ -135,6 +135,7 @@
 
 
   </div>
+
   <div id="screen4" style="text-align: center;
      background-color: #fdfbf2;
      height: 100vh;
@@ -343,10 +344,23 @@
 
   <script>
     function detectScreen() {
-      let dpi = 96 * window.devicePixelRatio;
-      let widthInches = window.innerWidth / dpi;
-      let heightInches = window.innerHeight / dpi;
+      const dpr = window.devicePixelRatio || 1;
+      const correctionFactor = 1.25;
+      const ppi = dpr * 96 * correctionFactor;
 
+      const currentScaling = dpr * 100;
+      const cssW = window.innerWidth;
+      const cssH = window.innerHeight;
+
+      const cssW100 = cssW * (currentScaling / 100);
+      const cssH100 = cssH * (currentScaling / 100);
+
+      const widthInches = cssW100 / ppi;
+      const heightInches = cssH100 / ppi;
+
+      const widthLimit = 6.9;
+      const heightLimit = 3.1;
+      let screenType = "";
 
       document.getElementById("screen1").style.display = "none";
       document.getElementById("screen2").style.display = "none";
@@ -354,15 +368,15 @@
       document.getElementById("screen4").style.display = "none";
 
 
-      if (widthInches < heightInches) {
-        if (heightInches < 6.9 && widthInches < 3.1) {
+      if (widthInches < widthLimit && heightInches < heightLimit){
+        if (widthInches < heightInches){
           document.getElementById("screen1").style.display = "block";
         } else {
-          document.getElementById("screen3").style.display = "block";
-        }
-      } else if (widthInches > heightInches) {
-        if (heightInches < 6.9 && widthInches < 3.1) {
           document.getElementById("screen2").style.display = "block";
+        }
+      } else {
+        if (widthInches < heightInches){
+          document.getElementById("screen3").style.display = "block";
         } else {
           document.getElementById("screen4").style.display = "block";
         }
