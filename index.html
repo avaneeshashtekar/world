@@ -237,13 +237,13 @@
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
         loadQuantities();
         updateBadge();
-        // If the button element was passed, update its text to 'Added'
+        
         if (btnElem && btnElem.tagName) {
           try {
             btnElem.textContent = 'Added';
             btnElem.disabled = true;
           } catch (e) {
-            // ignore
+            
           }
         }
       }
@@ -268,7 +268,7 @@
 
         loadQuantities();
 
-        // Set 'Added' state on buttons based on localStorage
+        
         cartItems.forEach(item => {
           try {
             const btn = document.getElementById('add-btn-' + item.id);
@@ -277,7 +277,7 @@
               btn.disabled = true;
             }
           } catch (e) {
-            // ignore
+            
           }
         });
       };
