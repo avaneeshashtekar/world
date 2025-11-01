@@ -66,12 +66,28 @@
 
   <script>
     function detectScreen() {
-      let dpi = 96 * window.devicePixelRatio;
-      let widthInches = window.innerWidth / dpi;
-      let heightInches = window.innerHeight / dpi;
+      const dpr = window.devicePixelRatio || 1;
+      const correctionFactor = 1.25;
+      const ppi = dpr * 96 * correctionFactor;
+
+      const currentScaling = dpr * 100;
+      const cssW = window.innerWidth;
+      const cssH = window.innerHeight;
 
 
-      if (widthInches < heightInches && !(heightInches < 6.9 && widthInches < 3.1)) {
+      const cssW100 = cssW * (currentScaling / 100);
+      const cssH100 = cssH * (currentScaling / 100);
+
+
+      const widthInches = cssW100 / ppi;
+      const heightInches = cssH100 / ppi;
+
+
+      const widthLimit = 6.9;
+      const heightLimit = 3.1;
+
+
+      if (widthInches < heightInches || (heightInches < heightLimit && widthInches < widthLimit)) {
         window.location.href = 'index.html';
       }
     }
