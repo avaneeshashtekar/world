@@ -374,10 +374,10 @@
       let correctionFactor;
       const deviceType = getDeviceType();
       if (deviceType == mobile) {
-        correctionFactor = 3.0;
+        correctionFactor = 300;
       } else if (deviceType == tablet) {
-        correctionFactor = 1.75;
-      } else if (deviceType == laptop) {
+        correctionFactor = 20;
+      } else {
         correctionFactor = 1.25;
       }
       const ppi = dpr * 96 * correctionFactor;
