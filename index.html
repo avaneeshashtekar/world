@@ -371,7 +371,15 @@
   <script>
     function update() {
       const dpr = window.devicePixelRatio || 1;
-      const correctionFactor = 1.25;
+      let correctionFactor;
+      const deviceType = getDeviceType();
+      if (deviceType == mobile) {
+        correctionFactor = 3.0;
+      } else if (deviceType == tablet) {
+        correctionFactor = 1.75;
+      } else if (deviceType == laptop) {
+        correctionFactor = 1.25;
+      }
       const ppi = dpr * 96 * correctionFactor;
 
       const currentScaling = dpr * 100;
