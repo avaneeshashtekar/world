@@ -49,8 +49,13 @@
       color: white;
       font-size: 24px;
       border-radius: 10px;
+      padding:0;
     }
-
+    .image_sizer {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /*1.41....ratio number*/
+    }
     .grid-container {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -106,11 +111,19 @@
     };
   </script>
   <div class="grid-container">
-    <button class="sort-option">Sort by club</button>
-    <button class="sort-option">Sort by nation</button>
-    <button class="sort-option">Sort by year</button>
-    <button class="sort-option">Sort by player</button>
-
+    <button class="sort-option">Sort by club
+      <input type="image" src="C:\Users\Admin\Desktop\Screenshot 2025-09-24 133643.png" class="image_sizer"/>
+    </button>
+    <button class="sort-option">Sort by nation
+      <input type="image" src="C:\Users\Admin\Desktop\Screenshot 2025-09-24 133643.png" class="image_sizer"/>
+    </button>
+    <button class="sort-option">Sort by year
+      <input type="image" src="C:\Users\Admin\Desktop\Screenshot 2025-09-24 133643.png" class="image_sizer"/>
+    </button>
+    <button class="sort-option">Sort by player
+      <input type="image" src="C:\Users\Admin\Desktop\Screenshot 2025-09-24 133643.png" class="image_sizer"/>
+    </button>
+</div>
 </body>
 
 </html>
