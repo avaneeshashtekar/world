@@ -64,7 +64,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: repeat(4, 200px);
-      gap: 40px;
+      gap: 20px;
       width: 95%;
       margin: 50px auto;
     }
@@ -85,7 +85,7 @@
     }
 
 
-    .rectangle {
+    .rectangle4 {
       background-color: #ffbb77;
       display: flex;
       flex-direction: column;
@@ -93,6 +93,17 @@
       font-size: 24px;
       border-radius: 10px;
       height: 200px;
+      box-sizing: border-box;
+    }
+
+    .rectangle3 {
+      background-color: #ffbb77;
+      display: flex;
+      flex-direction: column;
+      color: white;
+      font-size: 24px;
+      border-radius: 10px;
+      height: 150px;
       box-sizing: border-box;
     }
 
@@ -164,7 +175,7 @@
       <span class="cart-badge" id="cartCount">0</span>
     </a>
     <div class="grid-container3">
-      <div class="rectangle">
+      <div class="rectangle3">
         <span>1</span>
         <div class="controls">
           <button onclick="decreaseQty(1);">-</button>
@@ -174,7 +185,7 @@
         <button class="add-to-cart" id="add-btn-1" onclick="addToCart(1, this)">Add to Cart</button>
       </div>
 
-      <div class="rectangle">
+      <div class="rectangle3">
         <span>2</span>
         <div class="controls">
           <button onclick="decreaseQty(2)">-</button>
@@ -183,7 +194,7 @@
         </div>
         <button class="add-to-cart" id="add-btn-2" onclick="addToCart(2, this)">Add to Cart</button>
       </div>
-      <div class="rectangle">
+      <div class="rectangle3">
         <span>3</span>
         <div class="controls">
           <button onclick="decreaseQty(3)">-</button>
@@ -193,7 +204,7 @@
         <button class="add-to-cart" id="add-btn-3" onclick="addToCart(3, this)">Add to Cart</button>
       </div>
 
-      <div class="rectangle">
+      <div class="rectangle3">
         <span>4</span>
         <div class="controls">
           <button onclick="decreaseQty(4)">-</button>
@@ -202,7 +213,7 @@
         </div>
         <button class="add-to-cart" id="add-btn-4" onclick="addToCart(4, this)">Add to Cart</button>
       </div>
-      <div class="rectangle">
+      <div class="rectangle3">
         <span>5</span>
         <div class="controls">
           <button onclick="decreaseQty(5)">-</button>
@@ -212,7 +223,7 @@
         <button class="add-to-cart" id="add-btn-5" onclick="addToCart(5, this)">Add to Cart</button>
       </div>
 
-      <div class="rectangle">
+      <div class="rectangle3">
         <span>6</span>
         <div class="controls">
           <button onclick="decreaseQty(6)">-</button>
@@ -221,7 +232,7 @@
         </div>
         <button class="add-to-cart" id="add-btn-6" onclick="addToCart(6, this)">Add to Cart</button>
       </div>
-      <div class="rectangle">
+      <div class="rectangle3">
         <span>7</span>
         <div class="controls">
           <button onclick="decreaseQty(7)">-</button>
@@ -231,7 +242,7 @@
         <button class="add-to-cart" id="add-btn-7" onclick="addToCart(7, this)">Add to Cart</button>
       </div>
 
-      <div class="rectangle">
+      <div class="rectangle3">
         <span>8</span>
         <div class="controls">
           <button onclick="decreaseQty(8)">-</button>
@@ -288,7 +299,7 @@
 
 
     <div class="grid-container4">
-      <div class="rectangle">
+      <div class="rectangle4">
         <span>1</span>
         <div class="controls">
           <button onclick="decreaseQty(1);">-</button>
@@ -298,7 +309,7 @@
         <button class="add-to-cart" id="add-btn-1" onclick="addToCart(1, this)">Add to Cart</button>
       </div>
 
-      <div class="rectangle">
+      <div class="rectangle4">
         <span>2</span>
         <div class="controls">
           <button onclick="decreaseQty(2)">-</button>
@@ -307,7 +318,7 @@
         </div>
         <button class="add-to-cart" id="add-btn-2" onclick="addToCart(2, this)">Add to Cart</button>
       </div>
-      <div class="rectangle">
+      <div class="rectangle4">
         <span>3</span>
         <div class="controls">
           <button onclick="decreaseQty(3)">-</button>
@@ -317,7 +328,7 @@
         <button class="add-to-cart" id="add-btn-3" onclick="addToCart(3, this)">Add to Cart</button>
       </div>
 
-      <div class="rectangle">
+      <div class="rectangle4">
         <span>4</span>
         <div class="controls">
           <button onclick="decreaseQty(4)">-</button>
@@ -326,7 +337,7 @@
         </div>
         <button class="add-to-cart" id="add-btn-4" onclick="addToCart(4, this)">Add to Cart</button>
       </div>
-      <div class="rectangle">
+      <div class="rectangle4">
         <span>5</span>
         <div class="controls">
           <button onclick="decreaseQty(5)">-</button>
@@ -336,7 +347,7 @@
         <button class="add-to-cart" id="add-btn-5" onclick="addToCart(5, this)">Add to Cart</button>
       </div>
 
-      <div class="rectangle">
+      <div class="rectangle4">
         <span>6</span>
         <div class="controls">
           <button onclick="decreaseQty(6)">-</button>
@@ -345,7 +356,7 @@
         </div>
         <button class="add-to-cart" id="add-btn-6" onclick="addToCart(6, this)">Add to Cart</button>
       </div>
-      <div class="rectangle">
+      <div class="rectangle4">
         <span>7</span>
         <div class="controls">
           <button onclick="decreaseQty(7)">-</button>
@@ -355,7 +366,7 @@
         <button class="add-to-cart" id="add-btn-7" onclick="addToCart(7, this)">Add to Cart</button>
       </div>
 
-      <div class="rectangle">
+      <div class="rectangle4">
         <span>8</span>
         <div class="controls">
           <button onclick="decreaseQty(8)">-</button>
