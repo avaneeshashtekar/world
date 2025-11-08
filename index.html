@@ -51,19 +51,10 @@
       line-height: 1.2;
     }
 
-    .grid-container4{
+    .grid-container {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       grid-template-rows: repeat(2, 200px);
-      gap: 40px;
-      width: 95%;
-      margin: 50px auto;
-    }
-
-    .grid-container3{
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(4, 200px);
       gap: 40px;
       width: 95%;
       margin: 50px auto;
@@ -148,7 +139,7 @@
             position: relative;
             z-index: 1;
             width: 80%;
-            max-width: 350px;
+            max-width: 600px;
     	    padding: 7px 5px;
     	    font-size: 18px;
             border-radius: 18px;
@@ -163,84 +154,6 @@
     <a href="cart.html" class="cart-icon">🛒
       <span class="cart-badge" id="cartCount">0</span>
     </a>
-    <div class="grid-container3">
-      <div class="rectangle">
-        <span>1</span>
-        <div class="controls">
-          <button onclick="decreaseQty(1);">-</button>
-          <span id="qty-1">1</span>
-          <button onclick="increaseQty(1)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-1" onclick="addToCart(1, this)">Add to Cart</button>
-      </div>
-
-      <div class="rectangle">
-        <span>2</span>
-        <div class="controls">
-          <button onclick="decreaseQty(2)">-</button>
-          <span id="qty-2">1</span>
-          <button onclick="increaseQty(2)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-2" onclick="addToCart(2, this)">Add to Cart</button>
-      </div>
-      <div class="rectangle">
-        <span>3</span>
-        <div class="controls">
-          <button onclick="decreaseQty(3)">-</button>
-          <span id="qty-3">1</span>
-          <button onclick="increaseQty(3)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-3" onclick="addToCart(3, this)">Add to Cart</button>
-      </div>
-
-      <div class="rectangle">
-        <span>4</span>
-        <div class="controls">
-          <button onclick="decreaseQty(4)">-</button>
-          <span id="qty-4">1</span>
-          <button onclick="increaseQty(4)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-4" onclick="addToCart(4, this)">Add to Cart</button>
-      </div>
-      <div class="rectangle">
-        <span>5</span>
-        <div class="controls">
-          <button onclick="decreaseQty(5)">-</button>
-          <span id="qty-5">1</span>
-          <button onclick="increaseQty(5)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-5" onclick="addToCart(5, this)">Add to Cart</button>
-      </div>
-
-      <div class="rectangle">
-        <span>6</span>
-        <div class="controls">
-          <button onclick="decreaseQty(6)">-</button>
-          <span id="qty-6">1</span>
-          <button onclick="increaseQty(6)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-6" onclick="addToCart(6, this)">Add to Cart</button>
-      </div>
-      <div class="rectangle">
-        <span>7</span>
-        <div class="controls">
-          <button onclick="decreaseQty(7)">-</button>
-          <span id="qty-7">1</span>
-          <button onclick="increaseQty(7)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-7" onclick="addToCart(7, this)">Add to Cart</button>
-      </div>
-
-      <div class="rectangle">
-        <span>8</span>
-        <div class="controls">
-          <button onclick="decreaseQty(8)">-</button>
-          <span id="qty-8">1</span>
-          <button onclick="increaseQty(8)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-8" onclick="addToCart(8, this)">Add to Cart</button>
-      </div>
-    </div>
 
 
 
@@ -287,7 +200,7 @@
 
 
 
-    <div class="grid-container4">
+    <div class="grid-container">
       <div class="rectangle">
         <span>1</span>
         <div class="controls">
@@ -375,7 +288,7 @@
     let quantities = {};
 
     function updateBadge() {
-      const cartCounts = document.querySelectorAll("#cartCount"); 
+      const cartCounts = document.querySelectorAll("#cartCount"); // all badges
       let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
       let distinctCount = cartItems.length;
 
