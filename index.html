@@ -124,15 +124,49 @@
 
 
   </div>
-  <div id="screen3">
-
-
-    big portrait
-
+  <div id="screen3" style="text-align: center;
+     background-color: #fdfbf2;
+     height: 100vh;
+     box-sizing: border-box;">
+    <div style=" 
+        position: absolute;
+        width: 100%;             
+        height: 70px;           
+        background-color: #262626; 
+        z-index: 0;">
+    </div>
+    <button style="
+            position: relative;
+            z-index: 1;
+            width: 80%;
+            max-width: 600px;
+    	    padding: 7px 5px;
+    	    font-size: 18px;
+            border-radius: 18px;
+    	    background-color: #ddd;
+            cursor: pointer;
+            margin-top: 12px;" onclick="window.location.href='searchpage.html';">
+      search🔍
+    </button>
+    <h1 style="margin-top: 40px; font-size: 48px; font-weight: bold;">
+      JerseyWave
+    </h1>
+    <a href="cart.html" class="cart-icon">🛒
+      <span class="cart-badge" id="cartCount">0</span>
+    </a>
 
 
 
   </div>
+
+
+
+
+
+
+
+
+
   <div id="screen4" style="text-align: center;
      background-color: #fdfbf2;
      height: 100vh;
@@ -164,122 +198,7 @@
       <span class="cart-badge" id="cartCount">0</span>
     </a>
 
-    <script>
-      let count = 0;
-      const cartCount = document.getElementById("cartCount");
-      let quantities = {};
 
-      function updateBadge() {
-        const cartCount = document.getElementById("cartCount");
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-
-        let distinctCount = cartItems.length;
-
-        if (distinctCount === 0) {
-          cartCount.style.display = "none";
-        } else {
-          cartCount.style.display = "inline-block";
-          cartCount.textContent = distinctCount;
-        }
-      }
-
-      function increaseQty(productId) {
-        const qtySpan = document.getElementById("qty-" + productId);
-        let current = parseInt(qtySpan.textContent);
-        current++;
-        qtySpan.textContent = current;
-
-
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        let existing = cartItems.find(item => item.id === productId);
-        if (existing) {
-          existing.qty = current;
-          localStorage.setItem("cartItems", JSON.stringify(cartItems));
-          loadQuantities();
-        }
-      }
-
-      function decreaseQty(productId) {
-        const qtySpan = document.getElementById("qty-" + productId);
-        let current = parseInt(qtySpan.textContent);
-        if (current > 1) {
-          current--;
-          qtySpan.textContent = current;
-
-
-          let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-          let existing = cartItems.find(item => item.id === productId);
-          if (existing) {
-            existing.qty = current;
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
-            loadQuantities();
-          }
-        }
-      }
-
-
-      function addToCart(productId, btnElem) {
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        let qtySpan = document.getElementById("qty-" + productId);
-        let currentQty = parseInt(qtySpan.textContent);
-
-        let existing = cartItems.find(item => item.id === productId);
-        if (existing) {
-          existing.qty += 1;
-        } else {
-
-          cartItems.push({ id: productId, qty: currentQty });
-        }
-
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-        loadQuantities();
-        updateBadge();
-
-        if (btnElem && btnElem.tagName) {
-          try {
-            btnElem.textContent = 'Added';
-            btnElem.disabled = true;
-          } catch (e) {
-
-          }
-        }
-      }
-
-
-      function loadQuantities() {
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        cartItems.forEach(item => {
-          const qtySpan = document.getElementById("qty-" + item.id);
-          if (qtySpan) {
-            qtySpan.textContent = item.qty;
-          }
-        });
-      }
-      window.onload = function () {
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-
-        count = cartItems.length;
-        updateBadge();
-
-
-        loadQuantities();
-
-
-        cartItems.forEach(item => {
-          try {
-            const btn = document.getElementById('add-btn-' + item.id);
-            if (btn) {
-              btn.textContent = 'Added';
-              btn.disabled = true;
-            }
-          } catch (e) {
-
-          }
-        });
-      };
-    </script>
 
     <div class="grid-container">
       <div class="rectangle">
@@ -361,6 +280,125 @@
     </div>
   </div>
 
+
+
+  <script>
+    let count = 0;
+    const cartCount = document.getElementById("cartCount");
+    let quantities = {};
+
+    function updateBadge() {
+      const cartCounts = document.querySelectorAll("#cartCount"); // all badges
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      let distinctCount = cartItems.length;
+
+      cartCounts.forEach(cartCount => {
+        if (distinctCount === 0) {
+          cartCount.style.display = "none";
+        } else {
+          cartCount.style.display = "inline-block";
+          cartCount.textContent = distinctCount;
+        }
+      });
+    }
+
+    function increaseQty(productId) {
+      const qtySpan = document.getElementById("qty-" + productId);
+      let current = parseInt(qtySpan.textContent);
+      current++;
+      qtySpan.textContent = current;
+
+
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      let existing = cartItems.find(item => item.id === productId);
+      if (existing) {
+        existing.qty = current;
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        loadQuantities();
+      }
+    }
+
+    function decreaseQty(productId) {
+      const qtySpan = document.getElementById("qty-" + productId);
+      let current = parseInt(qtySpan.textContent);
+      if (current > 1) {
+        current--;
+        qtySpan.textContent = current;
+
+
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        let existing = cartItems.find(item => item.id === productId);
+        if (existing) {
+          existing.qty = current;
+          localStorage.setItem("cartItems", JSON.stringify(cartItems));
+          loadQuantities();
+        }
+      }
+    }
+
+
+    function addToCart(productId, btnElem) {
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      let qtySpan = document.getElementById("qty-" + productId);
+      let currentQty = parseInt(qtySpan.textContent);
+
+      let existing = cartItems.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+
+        cartItems.push({ id: productId, qty: currentQty });
+      }
+
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      loadQuantities();
+      updateBadge();
+
+      if (btnElem && btnElem.tagName) {
+        try {
+          btnElem.textContent = 'Added';
+          btnElem.disabled = true;
+        } catch (e) {
+
+        }
+      }
+    }
+
+
+    function loadQuantities() {
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      cartItems.forEach(item => {
+        const qtySpan = document.getElementById("qty-" + item.id);
+        if (qtySpan) {
+          qtySpan.textContent = item.qty;
+        }
+      });
+    }
+    window.onload = function () {
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+
+      count = cartItems.length;
+      updateBadge();
+
+
+      loadQuantities();
+
+
+      cartItems.forEach(item => {
+        try {
+          const btn = document.getElementById('add-btn-' + item.id);
+          if (btn) {
+            btn.textContent = 'Added';
+            btn.disabled = true;
+          }
+        } catch (e) {
+
+        }
+      });
+    };
+  </script>
+
   <script>
     function update() {
       const dpr = window.devicePixelRatio || 1;
@@ -410,6 +448,7 @@
     window.addEventListener("resize", update);
 
   </script>
+
 
 </body>
 
