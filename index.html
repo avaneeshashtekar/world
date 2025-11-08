@@ -60,14 +60,6 @@
       margin: 50px auto;
     }
 
-    .grid-container1 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(4, 200px);
-      gap: 40px;
-      width: 95%;
-      margin: 50px auto;
-    }
     .add-to-cart {
       padding: 2px 9px;
       font-size: 16px;
@@ -117,13 +109,7 @@
 
   <div id="screen1">
 
-
-
-
-    screen1 small portrait
-    </div>
-
-
+    small portrait
 
 
 
@@ -138,234 +124,10 @@
 
 
   </div>
-  <div id="screen3"  style="text-align: center;
-     background-color: #fdfbf2;
-     height: 100vh;
-     box-sizing: border-box;">
-    <div style=" 
-        position: absolute;
-        width: 100%;             
-        height: 70px;           
-        background-color: #262626; 
-        z-index: 0;">
-    </div>
-    <button style="
-            position: relative;
-            z-index: 1;
-            width: 80%;
-            max-width: 600px;
-    	    padding: 7px 5px;
-    	    font-size: 18px;
-            border-radius: 18px;
-    	    background-color: #ddd;
-            cursor: pointer;
-            margin-top: 12px;" onclick="window.location.href='searchpage.html';">
-      search🔍
-    </button>
-    <h1 style="margin-top: 40px; font-size: 48px; font-weight: bold;">
-      JerseyWave
-    </h1>
-    <a href="cart.html" class="cart-icon">🛒
-      <span class="cart-badge" id="cartCount">0</span>
-    </a>
-
-    <script>
-      let count1= 0;
-      const cartCount1 = document.getElementById("cartCount");
-      let quantities1 = {};
-
-      function updateBadge() {
-        const cartCount1 = document.getElementById("cartCount");
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  <div id="screen3">
 
 
-        let distinctCount = cartItems.length;
-
-        if (distinctCount === 0) {
-          cartCount1.style.display = "none";
-        } else {
-          cartCount1.style.display = "inline-block";
-          cartCount1.textContent = distinctCount;
-        }
-      }
-
-      function increaseQty(productId) {
-        const qtySpan = document.getElementById("qty-" + productId);
-        let current = parseInt(qtySpan.textContent);
-        current++;
-        qtySpan.textContent = current;
-
-
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        let existing = cartItems.find(item => item.id === productId);
-        if (existing) {
-          existing.qty = current;
-          localStorage.setItem("cartItems", JSON.stringify(cartItems));
-          loadQuantities();
-        }
-      }
-
-      function decreaseQty(productId) {
-        const qtySpan = document.getElementById("qty-" + productId);
-        let current = parseInt(qtySpan.textContent);
-        if (current > 1) {
-          current--;
-          qtySpan.textContent = current;
-
-
-          let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-          let existing = cartItems.find(item => item.id === productId);
-          if (existing) {
-            existing.qty = current;
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
-            loadQuantities();
-          }
-        }
-      }
-
-
-      function addToCart(productId, btnElem) {
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        let qtySpan = document.getElementById("qty-" + productId);
-        let currentQty = parseInt(qtySpan.textContent);
-
-        let existing = cartItems.find(item => item.id === productId);
-        if (existing) {
-          existing.qty += 1;
-        } else {
-
-          cartItems.push({ id: productId, qty: currentQty });
-        }
-
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-        loadQuantities();
-        updateBadge();
-
-        if (btnElem && btnElem.tagName) {
-          try {
-            btnElem.textContent = 'Added';
-            btnElem.disabled = true;
-          } catch (e) {
-
-          }
-        }
-      }
-
-
-      function loadQuantities() {
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        cartItems.forEach(item => {
-          const qtySpan = document.getElementById("qty-" + item.id);
-          if (qtySpan) {
-            qtySpan.textContent = item.qty;
-          }
-        });
-      }
-      window.onload = function () {
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-
-        count = cartItems.length;
-        updateBadge();
-
-
-        loadQuantities();
-
-
-        cartItems.forEach(item => {
-          try {
-            const btn = document.getElementById('add-btn-' + item.id);
-            if (btn) {
-              btn.textContent = 'Added';
-              btn.disabled = true;
-            }
-          } catch (e) {
-
-          }
-        });
-      };
-    </script>
-
-    <div class="grid-container1">
-      <div class="rectangle">
-        <span>1</span>
-        <div class="controls">
-          <button onclick="decreaseQty(1);">-</button>
-          <span id="qty-1">1</span>
-          <button onclick="increaseQty(1)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-1" onclick="addToCart(1, this)">Add to Cart</button>
-      </div>
-
-      <div class="rectangle">
-        <span>2</span>
-        <div class="controls">
-          <button onclick="decreaseQty(2)">-</button>
-          <span id="qty-2">1</span>
-          <button onclick="increaseQty(2)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-2" onclick="addToCart(2, this)">Add to Cart</button>
-      </div>
-      <div class="rectangle">
-        <span>3</span>
-        <div class="controls">
-          <button onclick="decreaseQty(3)">-</button>
-          <span id="qty-3">1</span>
-          <button onclick="increaseQty(3)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-3" onclick="addToCart(3, this)">Add to Cart</button>
-      </div>
-
-      <div class="rectangle">
-        <span>4</span>
-        <div class="controls">
-          <button onclick="decreaseQty(4)">-</button>
-          <span id="qty-4">1</span>
-          <button onclick="increaseQty(4)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-4" onclick="addToCart(4, this)">Add to Cart</button>
-      </div>
-      <div class="rectangle">
-        <span>5</span>
-        <div class="controls">
-          <button onclick="decreaseQty(5)">-</button>
-          <span id="qty-5">1</span>
-          <button onclick="increaseQty(5)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-5" onclick="addToCart(5, this)">Add to Cart</button>
-      </div>
-
-      <div class="rectangle">
-        <span>6</span>
-        <div class="controls">
-          <button onclick="decreaseQty(6)">-</button>
-          <span id="qty-6">1</span>
-          <button onclick="increaseQty(6)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-6" onclick="addToCart(6, this)">Add to Cart</button>
-      </div>
-      <div class="rectangle">
-        <span>7</span>
-        <div class="controls">
-          <button onclick="decreaseQty(7)">-</button>
-          <span id="qty-7">1</span>
-          <button onclick="increaseQty(7)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-7" onclick="addToCart(7, this)">Add to Cart</button>
-      </div>
-
-      <div class="rectangle">
-        <span>8</span>
-        <div class="controls">
-          <button onclick="decreaseQty(8)">-</button>
-          <span id="qty-8">1</span>
-          <button onclick="increaseQty(8)">+</button>
-        </div>
-        <button class="add-to-cart" id="add-btn-8" onclick="addToCart(8, this)">Add to Cart</button>
-      </div>
-
-</div>
-    
+    big portrait
 
 
 
@@ -602,7 +364,7 @@
   <script>
     function update() {
       const dpr = window.devicePixelRatio || 1;
-      const correctionFactor = 1.5; /*1.5 is correct no.*/
+      const correctionFactor = 1.25; /*1.5 is correct no.*/
       const ppi = dpr * 96 * correctionFactor;
 
       const currentScaling = dpr * 100;
